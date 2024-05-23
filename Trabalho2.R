@@ -84,7 +84,7 @@ snp = sample(nrow(alleleA50k), 3, replace = FALSE)
 
 
 par(ask =TRUE)
-for( i in snp[3]){
+for( i in snp){
   message("Estamos no SNP ",i)
   titulo = paste0("SNP ",i)
   MS_tmp = NULL
@@ -116,7 +116,7 @@ for( i in snp[3]){
   axis(1, at = 1:25, labels = 1:25)
   abline(v = 3, col = "red", lty = 2)
   
-  k.medias = kmeans(MS, 21)
+  k.medias = kmeans(MS, 3)
   
   MS_tmp = cbind(MS, k.medias$cluster)
   
@@ -135,6 +135,7 @@ for( i in snp[3]){
   
   print(ggplot(k, aes(x = S, y = M , color = cluster)) + geom_point() +
           labs(title = paste0("Kmeans Optimization - ",titulo))) 
+  print(table(k$cluster))
   
   # o modelo nao ajustou bem (talvez erro nos chutes iniciais)
   
